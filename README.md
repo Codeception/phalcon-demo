@@ -1,4 +1,6 @@
-# Phalcon Demo Application
+# Phalcon Demo Application 
+
+[![Build Status](https://travis-ci.org/Codeception/phalcon-demo.svg?branch=master)](https://travis-ci.org/Codeception/phalcon-demo)
 
 We use **modified** [Phalcon INVO Application][1] to demonstrate basics of Codeception testing.
 We expect to implement as many features as possible to showcase the framework and its
