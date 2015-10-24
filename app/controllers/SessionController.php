@@ -33,7 +33,7 @@ class SessionController extends ControllerBase
     private function registerSession(Users $user)
     {
         $this->session->set('auth', [
-            'id' => $user->id,
+            'id'   => $user->id,
             'name' => $user->name
         ]);
     }
@@ -44,7 +44,7 @@ class SessionController extends ControllerBase
     public function startAction()
     {
         if ($this->request->isPost()) {
-            $email = $this->request->getPost('email');
+            $email    = $this->request->getPost('email');
             $password = $this->request->getPost('password');
 
             /** @var Users $user */

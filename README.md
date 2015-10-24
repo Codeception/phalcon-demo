@@ -1,6 +1,6 @@
 # Phalcon Demo Application
 
-We use modified [Phalcon INVO Application][1] to demonstrate basics of Codeception testing.
+We use **modified** [Phalcon INVO Application][1] to demonstrate basics of Codeception testing.
 We expect to implement as many features as possible to showcase the framework and its
 potential.
 

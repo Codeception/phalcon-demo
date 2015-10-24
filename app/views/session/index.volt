@@ -3,7 +3,7 @@
 <div class="row">
     <div class="col-md-6">
         <div class="page-header">
-            <h2>Log In</h2>
+            <h2 id="login-header">Log In</h2>
         </div>
         {{ form('session/start', 'role': 'form') }}
             <fieldset>
@@ -20,7 +20,7 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    {{ submit_button('Login', 'class': 'btn btn-primary btn-large') }}
+                    {{ submit_button('Login', 'class': 'btn btn-primary btn-large', 'id': 'btn-signin') }}
                 </div>
             </fieldset>
         </form>
@@ -29,7 +29,7 @@
     <div class="col-md-6">
 
         <div class="page-header">
-            <h2>Don't have an account yet?</h2>
+            <h2 id="signup-header">Don't have an account yet?</h2>
         </div>
 
         <p>Create an account offers the following advantages:</p>
@@ -40,7 +40,7 @@
         </ul>
 
         <div class="clearfix center">
-            {{ link_to('register', 'Sign Up', 'class': 'btn btn-primary btn-large btn-success') }}
+            {{ link_to('register', 'Sign Up', 'class': 'btn btn-primary btn-large btn-success btn-signup') }}
         </div>
     </div>
 
