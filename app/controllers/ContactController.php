@@ -1,5 +1,10 @@
 <?php
 
+namespace PhalconDemo\Controllers;
+
+use PhalconDemo\Forms\ContactForm;
+use PhalconDemo\Models\Contact;
+
 /**
  * ContactController
  *
@@ -28,7 +33,7 @@ class ContactController extends ControllerBase
         }
 
         $form = new ContactForm;
-        $contact = new Contact();
+        $contact = new Contact;
 
         // Validate the form
         $data = $this->request->getPost();

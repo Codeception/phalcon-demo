@@ -1,5 +1,7 @@
 <?php
 
+namespace PhalconDemo\Library;
+
 use Phalcon\Mvc\User\Component;
 
 /**
@@ -9,7 +11,7 @@ use Phalcon\Mvc\User\Component;
  */
 class Elements extends Component
 {
-    private $_headerMenu = [
+    private $headerMenu = [
         'navbar-left' => [
             'index' => [
                 'caption' => 'Home',
@@ -36,7 +38,7 @@ class Elements extends Component
         ]
     ];
 
-    private $_tabs = [
+    private $tabs = [
         'Invoices' => [
             'controller' => 'invoices',
             'action' => 'index',
@@ -73,16 +75,16 @@ class Elements extends Component
     {
         $auth = $this->session->get('auth');
         if ($auth) {
-            $this->_headerMenu['navbar-right']['session'] = [
+            $this->headerMenu['navbar-right']['session'] = [
                 'caption' => 'Log Out',
                 'action' => 'end'
             ];
         } else {
-            unset($this->_headerMenu['navbar-left']['invoices']);
+            unset($this->headerMenu['navbar-left']['invoices']);
         }
 
         $controllerName = $this->view->getControllerName();
-        foreach ($this->_headerMenu as $position => $menu) {
+        foreach ($this->headerMenu as $position => $menu) {
             echo '<div class="nav-collapse">';
             echo '<ul class="nav navbar-nav ', $position, '">';
             foreach ($menu as $controller => $option) {
@@ -108,7 +110,7 @@ class Elements extends Component
         $controllerName = $this->view->getControllerName();
         $actionName = $this->view->getActionName();
         echo '<ul class="nav nav-tabs">';
-        foreach ($this->_tabs as $caption => $option) {
+        foreach ($this->tabs as $caption => $option) {
             if ($option['controller'] == $controllerName && ($option['action'] == $actionName || $option['any'])) {
                 echo '<li class="active">';
             } else {

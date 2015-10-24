@@ -1,5 +1,7 @@
 <?php
 
+namespace PhalconDemo\Models;
+
 use Phalcon\Mvc\Model;
 use Phalcon\Mvc\Model\Validator\Email as EmailValidator;
 use Phalcon\Mvc\Model\Validator\Uniqueness as UniquenessValidator;

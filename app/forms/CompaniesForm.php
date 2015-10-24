@@ -1,5 +1,7 @@
 <?php
 
+namespace PhalconDemo\Forms;
+
 use Phalcon\Forms\Form;
 use Phalcon\Forms\Element\Text;
 use Phalcon\Forms\Element\Hidden;
@@ -49,5 +51,4 @@ class CompaniesForm extends Form
         ]);
         $this->add($city);
     }
-
 }

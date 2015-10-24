@@ -1,5 +1,7 @@
 <?php
 
+namespace PhalconDemo\Models;
+
 use Phalcon\Mvc\Model;
 
 /**
@@ -39,9 +41,15 @@ class Products extends Model
      */
     public function initialize()
     {
-        $this->belongsTo('product_types_id', 'ProductTypes', 'id', [
-            'reusable' => true
-        ]);
+        $this->belongsTo(
+            'product_types_id',
+            __NAMESPACE__ . '\ProductTypes',
+            'id',
+            [
+                'reusable' => true,
+                'alias'    => 'ProductTypes'
+            ]
+        );
     }
 
     /**
@@ -56,5 +64,4 @@ class Products extends Model
         }
         return 'No';
     }
-
 }

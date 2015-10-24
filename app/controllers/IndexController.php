@@ -1,5 +1,7 @@
 <?php
 
+namespace PhalconDemo\Controllers;
+
 class IndexController extends ControllerBase
 {
     public function initialize()

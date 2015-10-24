@@ -1,7 +1,10 @@
 <?php
 
+namespace PhalconDemo\Controllers;
+
 use Phalcon\Flash;
 use Phalcon\Session;
+use PhalconDemo\Models\Users;
 
 class InvoicesController extends ControllerBase
 {
@@ -23,7 +26,7 @@ class InvoicesController extends ControllerBase
         // Get session info
         $auth = $this->session->get('auth');
 
-        /** @var \Users $user */
+        /** @var Users $user */
         $user = Users::findFirst($auth['id']);
 
         if ($user == false) {
@@ -34,7 +37,6 @@ class InvoicesController extends ControllerBase
             $this->tag->setDefault('name', $user->name);
             $this->tag->setDefault('email', $user->email);
         } else {
-
             $name = $this->request->getPost('name', array('string', 'striptags'));
             $email = $this->request->getPost('email', 'email');
 

@@ -1,5 +1,7 @@
 <?php
 
+namespace PhalconDemo\Controllers;
+
 class ErrorsController extends ControllerBase
 {
     public function initialize()

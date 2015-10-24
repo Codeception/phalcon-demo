@@ -9,13 +9,13 @@ use Phalcon\Loader;
 
 $loader = new Loader;
 
-$loader->registerDirs(
+$loader->registerNamespaces(
     [
-        APP_PATH . $config->get('application')->controllersDir,
-        APP_PATH . $config->get('application')->pluginsDir,
-        APP_PATH . $config->get('application')->libraryDir,
-        APP_PATH . $config->get('application')->modelsDir,
-        APP_PATH . $config->get('application')->formsDir
+        'PhalconDemo\Controllers' => APP_PATH . $config->get('application')->controllersDir,
+        'PhalconDemo\Forms'       => APP_PATH . $config->get('application')->formsDir,
+        'PhalconDemo\Models'      => APP_PATH . $config->get('application')->modelsDir,
+        'PhalconDemo\Plugins'     => APP_PATH . $config->get('application')->pluginsDir,
+        'PhalconDemo\Library'     => APP_PATH . $config->get('application')->libraryDir
     ]
 );
 

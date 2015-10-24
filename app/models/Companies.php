@@ -1,5 +1,7 @@
 <?php
 
+namespace PhalconDemo\Models;
+
 use Phalcon\Mvc\Model;
 
 /**

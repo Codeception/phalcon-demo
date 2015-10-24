@@ -1,5 +1,11 @@
 <?php
 
+namespace PhalconDemo\Controllers;
+
+use PhalconDemo\Forms\RegisterForm;
+use PhalconDemo\Models\Users;
+use Phalcon\Db\RawValue;
+
 /**
  * SessionController
  *
@@ -21,7 +27,6 @@ class RegisterController extends ControllerBase
         $form = new RegisterForm;
 
         if ($this->request->isPost()) {
-
             $name = $this->request->getPost('name', array('string', 'striptags'));
             $username = $this->request->getPost('username', 'alphanum');
             $email = $this->request->getPost('email', 'email');
@@ -33,12 +38,12 @@ class RegisterController extends ControllerBase
                 return false;
             }
 
-            $user = new Users();
+            $user = new Users;
             $user->username = $username;
             $user->password = sha1($password);
             $user->name = $name;
             $user->email = $email;
-            $user->created_at = new Phalcon\Db\RawValue('now()');
+            $user->created_at = new RawValue('NOW()');
             $user->active = 'Y';
 
             if (false == $user->save()) {

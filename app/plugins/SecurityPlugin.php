@@ -1,5 +1,7 @@
 <?php
 
+namespace PhalconDemo\Plugins;
+
 use Phalcon\Acl;
 use Phalcon\Acl\Role;
 use Phalcon\Acl\Resource;
@@ -66,7 +68,7 @@ class SecurityPlugin extends Plugin
             //Grant access to public areas to both users and guests
             foreach ($roles as $role) {
                 foreach ($publicResources as $resource => $actions) {
-                    foreach ($actions as $action){
+                    foreach ($actions as $action) {
                         $acl->allow($role->getName(), $resource, $action);
                     }
                 }
@@ -74,7 +76,7 @@ class SecurityPlugin extends Plugin
 
             // Grant access to private area to role Users
             foreach ($privateResources as $resource => $actions) {
-                foreach ($actions as $action){
+                foreach ($actions as $action) {
                     $acl->allow('Users', $resource, $action);
                 }
             }
@@ -95,9 +97,7 @@ class SecurityPlugin extends Plugin
      */
     public function beforeDispatch(Event $event, Dispatcher $dispatcher)
     {
-
-        $auth = $this->session->get('auth');
-        if (!$auth){
+        if (!$auth = $this->session->get('auth')) {
             $role = 'Guests';
         } else {
             $role = 'Users';

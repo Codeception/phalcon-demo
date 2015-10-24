@@ -1,5 +1,9 @@
 <?php
 
+namespace PhalconDemo\Controllers;
+
+use PhalconDemo\Models\Users;
+
 /**
  * SessionController
  *
@@ -26,7 +30,7 @@ class SessionController extends ControllerBase
      *
      * @param Users $user
      */
-    private function _registerSession(Users $user)
+    private function registerSession(Users $user)
     {
         $this->session->set('auth', [
             'id' => $user->id,
@@ -40,18 +44,17 @@ class SessionController extends ControllerBase
     public function startAction()
     {
         if ($this->request->isPost()) {
-
             $email = $this->request->getPost('email');
             $password = $this->request->getPost('password');
 
-            /** @var \Users $user */
+            /** @var Users $user */
             $user = Users::findFirst(array(
                 "(email = :email: OR username = :email:) AND password = :password: AND active = 'Y'",
                 'bind' => ['email' => $email, 'password' => sha1($password)]
             ));
 
             if ($user != false) {
-                $this->_registerSession($user);
+                $this->registerSession($user);
                 $this->flash->success('Welcome ' . $user->name);
                 return $this->forward('invoices/index');
             }

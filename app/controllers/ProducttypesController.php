@@ -1,7 +1,11 @@
 <?php
 
+namespace PhalconDemo\Controllers;
+
 use Phalcon\Mvc\Model\Criteria;
 use Phalcon\Paginator\Adapter\Model as Paginator;
+use PhalconDemo\Forms\ProductTypesForm;
+use PhalconDemo\Models\ProductTypes;
 
 class ProductTypesController extends ControllerBase
 {
@@ -27,7 +31,7 @@ class ProductTypesController extends ControllerBase
     {
         $numberPage = 1;
         if ($this->request->isPost()) {
-            $query = Criteria::fromInput($this->di, "ProductTypes", $this->request->getPost());
+            $query = Criteria::fromInput($this->di, 'PhalconDemo\Models\ProductTypes', $this->request->getPost());
             $this->persistent->set('searchParams', $query->getParams());
         } else {
             $numberPage = $this->request->getQuery("page", "int");
