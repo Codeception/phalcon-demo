@@ -1,5 +1,5 @@
-app/config/config.ini.dev
-cache/volt/*.php
+/app/config/config.ini.dev
+/cache/volt/*.php
 .DS_Store*
 ehthumbs.db
 Icon?
@@ -10,4 +10,12 @@ Thumbs.db
 *.komodoproject
 *.sublime-project
 *.sublime-workspace
-.idea/
+composer.lock
+composer.phar
+/.idea/
+.vagrant
+Vagrantfile
+/nbproject/
+/build/
+/vendor/*
+/tests/_support/_generated/*.php
