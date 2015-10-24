@@ -24,14 +24,10 @@ after_script:
   - mysql -e 'DROP DATABASE phalcon_demo;'
 
 script:
-  - vendor/bin/phpcs --standard=PSR2 --encoding=utf-8 app/controllers/
-  - vendor/bin/phpcs --standard=PSR2 --encoding=utf-8 app/forms/
-  - vendor/bin/phpcs --standard=PSR2 --encoding=utf-8 app/library/
-  - vendor/bin/phpcs --standard=PSR2 --encoding=utf-8 app/models/
-  - vendor/bin/phpcs --standard=PSR2 --encoding=utf-8 app/plugins/
+  - vendor/bin/phpcs --standard=PSR2 --encoding=utf-8 app/controllers/ app/forms/ app/library/ app/models/ app/plugins/
 
   - vendor/bin/codecept build
-  - vendor/bin/codecept run --coverage-text
+  - vendor/bin/codecept run
 
 notifications:
   email:

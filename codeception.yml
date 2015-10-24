@@ -18,15 +18,6 @@ settings:
     # Tests (especially functional) can take a lot of memory
     # We set a high limit for them by default.
     memory_limit: 1024M
-coverage:
-    enabled: true
-    whitelist:
-        include:
-            - app/controllers/
-            - app/forms/
-            - app/library/
-            - app/models/
-            - app/plugins/
 
 extensions:
     enabled:
