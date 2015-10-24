@@ -4,7 +4,7 @@ use Phalcon\Mvc\Application;
 use Phalcon\Config\Adapter\Ini as ConfigIni;
 
 try {
-    require realpath(dirname(dirname(__FILE__))) . '/app/config/env.php';
+    require_once realpath(dirname(dirname(__FILE__))) . '/app/config/env.php';
 
     /**
      * Read the configuration
@@ -27,7 +27,11 @@ try {
 
     $application = new Application($di);
 
-    echo $application->handle()->getContent();
+    if (APP_STAGE == APP_TEST) {
+        return $application;
+    } else {
+        echo $application->handle()->getContent();
+    }
 } catch (Exception $e){
     echo $e->getMessage() . '<br>';
     echo '<pre>' . $e->getTraceAsString() . '</pre>';

@@ -9,3 +9,4 @@ modules:
     enabled:
         # add framework module here
         - \Helper\Functional
+        - Phalcon2

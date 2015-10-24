@@ -68,8 +68,10 @@ $di->setShared('view', function () use ($config, $di, $eventsManager) {
             '.volt'  => function ($view, $di) use ($config) {
                 $volt = new Volt($view, $di);
 
+                $compiledPath = APP_STAGE == APP_TEST ? DOCROOT . 'tests/_cache/' : DOCROOT . $config->get('volt')->cacheDir;
+
                 $options = [
-                    'compiledPath'      => DOCROOT . $config->get('volt')->cacheDir,
+                    'compiledPath'      => $compiledPath,
                     'compiledExtension' => $config->get('volt')->compiledExt,
                     'compiledSeparator' => $config->get('volt')->separator,
                     'compileAlways'     => APP_STAGE !== APP_PRODUCTION,

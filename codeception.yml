@@ -42,5 +42,7 @@ modules:
             dump: tests/_data/dump.sql
             populate: true
             cleanup: false
-
-error_level: "E_ALL | E_STRICT"
+        Phalcon2:
+            bootstrap: public/index.php
+            cleanup: true
+            savepoints: true
