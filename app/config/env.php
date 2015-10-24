@@ -47,4 +47,4 @@ define('APP_TEST', 'testing');
 /**
  * @const APP_DEVELOPMENT Current application stage
  */
-define('APP_STAGE', (getenv('APP_ENV') ? getenv('APP_ENV') : APP_PRODUCTION));
+defined('APP_STAGE') || define('APP_STAGE', (getenv('APP_ENV') ? getenv('APP_ENV') : APP_PRODUCTION));
