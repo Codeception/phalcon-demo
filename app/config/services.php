@@ -16,7 +16,7 @@ use Phalcon\Events\Manager as EventsManager;
 use PhalconDemo\Library\Elements;
 use PhalconDemo\Plugins\NotFoundPlugin;
 use PhalconDemo\Plugins\SecurityPlugin;
-
+use Phalcon\Mvc\Router;
 
 /**
  * The FactoryDefault Dependency Injector automatically register the right services providing a full stack framework
@@ -133,6 +133,34 @@ $di->set('session', function () {
     $session->start();
 
     return $session;
+});
+
+/**
+ * Router
+ */
+$di->setShared('router', function () use ($eventsManager) {
+    $routes = include APP_PATH . 'config/routes.php';
+
+    $router = new Router(false);
+
+    if (!isset($_GET['_url'])) {
+        $router->setUriSource(Router::URI_SOURCE_SERVER_REQUEST_URI);
+    }
+
+    $router->removeExtraSlashes(true);
+
+    foreach ($routes as $route => $items) {
+        $router
+            ->add($route, $items['params'])
+            ->setName($items['name']);
+    }
+
+    $router->setDefaultController('index');
+    $router->setDefaultAction('index');
+    $router->setDefaultNamespace('PhalconDemo\Controllers');
+    $router->setEventsManager($eventsManager);
+
+    return $router;
 });
 
 /**
