@@ -12,7 +12,7 @@ class RoutesCest
 
     public function routesWithTrailingSlashes(FunctionalTester $I)
     {
-        $I->amOnPage('/contact////////');
+        $I->amOnPage('/contact-us////////');
         $I->see('Contact Us');
         $I->seeCurrentRouteIs('front.contact');
     }
