@@ -14,7 +14,6 @@ class RoutesCest
     {
         $I->amOnPage('/contact////////');
         $I->see('Contact Us');
-        $I->see('Send us a message and let us know how we can help.');
-        $I->seeInCurrentUrl('/contact');
+        $I->seeCurrentRouteIs('front.contact');
     }
 }
