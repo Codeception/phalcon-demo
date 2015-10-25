@@ -58,11 +58,6 @@ class Elements extends Component
             'controller' => 'producttypes',
             'action' => 'index',
             'any' => true
-        ],
-        'Your Profile' => [
-            'controller' => 'invoices',
-            'action' => 'profile',
-            'any' => false
         ]
     ];
 
@@ -75,9 +70,15 @@ class Elements extends Component
     {
         $auth = $this->session->get('auth');
         if ($auth) {
-            $this->headerMenu['navbar-right']['session'] = [
-                'caption' => 'Log Out',
-                'action' => 'end'
+            $this->headerMenu['navbar-right'] = [
+                'profile' => [
+                    'caption' => 'Profile',
+                    'action'  => 'edit'
+                ],
+                'session' => [
+                    'caption' => 'Log Out',
+                    'action' => 'end'
+                ]
             ];
         } else {
             unset($this->headerMenu['navbar-left']['invoices']);
