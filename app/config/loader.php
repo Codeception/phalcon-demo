@@ -11,11 +11,11 @@ $loader = new Loader;
 
 $loader->registerNamespaces(
     [
-        'PhalconDemo\Controllers' => APP_PATH . $config->get('application')->controllersDir,
-        'PhalconDemo\Forms'       => APP_PATH . $config->get('application')->formsDir,
-        'PhalconDemo\Models'      => APP_PATH . $config->get('application')->modelsDir,
-        'PhalconDemo\Plugins'     => APP_PATH . $config->get('application')->pluginsDir,
-        'PhalconDemo\Library'     => APP_PATH . $config->get('application')->libraryDir
+        'PhalconDemo\Controllers' => DOCROOT . $config->get('application')->controllersDir,
+        'PhalconDemo\Forms'       => DOCROOT . $config->get('application')->formsDir,
+        'PhalconDemo\Models'      => DOCROOT . $config->get('application')->modelsDir,
+        'PhalconDemo\Plugins'     => DOCROOT . $config->get('application')->pluginsDir,
+        'PhalconDemo\Library'     => DOCROOT . $config->get('application')->libraryDir
     ]
 );
 

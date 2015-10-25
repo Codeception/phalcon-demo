@@ -8,7 +8,6 @@ use Phalcon\DI\FactoryDefault;
 use Phalcon\Mvc\Dispatcher;
 use Phalcon\Mvc\Url as UrlProvider;
 use Phalcon\Mvc\View\Engine\Volt as VoltEngine;
-use Phalcon\Db\Adapter\Pdo\Mysql;
 use Phalcon\Mvc\Model\Metadata\Memory as MetaData;
 use Phalcon\Session\Adapter\Files as SessionAdapter;
 use Phalcon\Flash\Session as FlashSession;
@@ -93,7 +92,7 @@ $di->setShared('view', function () use ($config, $di, $eventsManager) {
 
     $view
         ->setVar('version', Version::get())
-        ->setViewsDir(APP_PATH . $config->get('application')->viewsDir);
+        ->setViewsDir(DOCROOT . $config->get('application')->viewsDir);
 
     $eventsManager->attach('view', function ($event, $view) use ($di, $config) {
         /**
@@ -115,7 +114,12 @@ $di->setShared('view', function () use ($config, $di, $eventsManager) {
  * Database connection is created based in the parameters defined in the configuration file
  */
 $di->setShared('db', function () use ($config) {
-    return new Mysql($config->get('database')->toArray());
+    $config = $config->get('database')->toArray();
+
+    $dbClass = 'Phalcon\Db\Adapter\Pdo\\' . $config['adapter'];
+    unset($config['adapter']);
+
+    return new $dbClass($config);
 });
 
 /**
