@@ -25,6 +25,15 @@ return [
         'name' => 'front.contact'
     ],
 
+    '/login' => [
+        'params' => [
+            'controller' => 'session',
+            'action'     => 'index'
+        ],
+        'name'     => 'domain.route',
+        'hostname' => 'join.phalcon.demo'
+    ],
+
     '/:controller/:action/:params' => [
         'params' => [
             'controller' => 1,

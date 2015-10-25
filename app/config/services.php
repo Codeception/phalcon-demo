@@ -150,9 +150,15 @@ $di->setShared('router', function () use ($eventsManager) {
     $router->removeExtraSlashes(true);
 
     foreach ($routes as $route => $items) {
-        $router
-            ->add($route, $items['params'])
-            ->setName($items['name']);
+        $route = $router->add($route, $items['params']);
+
+        if (isset($items['hostname'])) {
+            $route->setHostname($items['hostname']);
+        }
+
+        if (isset($items['name'])) {
+            $route->setName($items['name']);
+        }
     }
 
     $router->setDefaultController('index');
