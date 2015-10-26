@@ -1,45 +1,52 @@
 <?php
+/**
+ * @var \Phalcon\Events\Manager $eventsManager
+ */
 
-return [
-    '/' => [
-        'params' => [
-            'controller' => 'index',
-            'action'     => 'index'
-        ],
-        'name' => 'front.index'
-    ],
+use Phalcon\Mvc\Router;
 
-    '/:controller' => [
-        'params' => [
-            'controller' => 1,
-            'action'     => 'index'
-        ],
-        'name' => 'front.controller'
-    ],
+$router = new Router();
 
-    '/contact-us' => [
-        'params' => [
-            'controller' => 'contact',
-            'action'     => 'index'
-        ],
-        'name' => 'front.contact'
-    ],
+$router->removeExtraSlashes(true);
 
-    '/login' => [
-        'params' => [
-            'controller' => 'session',
-            'action'     => 'index'
-        ],
-        'name'     => 'domain.route',
-        'hostname' => 'join.phalcon.demo'
-    ],
+if (!isset($_GET['_url'])) {
+    $router->setUriSource(Router::URI_SOURCE_SERVER_REQUEST_URI);
+}
 
-    '/:controller/:action/:params' => [
-        'params' => [
-            'controller' => 1,
-            'action'     => 2,
-            'params'     => 3
-        ],
-        'name' => 'front.full'
-    ],
-];
+$router->setEventsManager($eventsManager);
+
+$router->add('/:controller', [
+    'controller' => 1,
+    'action'     => 'index'
+])->setName('front.controller');
+
+$router->add('/contact-us', [
+    'controller' => 'contact',
+    'action'     => 'index'
+])->setName('front.contact');
+
+$router->add('/login', [
+    'controller' => 'session',
+    'action'     => 'index'
+])->setName('login.route');
+
+$route = $router->add('/signin', [
+    'controller' => 'session',
+    'action'     => 'index'
+]);
+
+$route->setName('domain.route');
+$route->setHostName('join.phalcon.demo');
+
+$router->add('/profile/edit', [
+    'controller' => 'profile',
+    'action'     => 'edit'
+])->setName('profile.edit');
+
+$router->add('/:controller/:action/:params', [
+    'controller' => 1,
+    'action'     => 2,
+    'params'     => 3,
+])->setName('front.full');
+
+return $router;

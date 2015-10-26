@@ -14,7 +14,8 @@ use Phalcon\Flash\Session as FlashSession;
 use Phalcon\Events\Manager as EventsManager;
 use PhalconDemo\Library\Elements;
 use PhalconDemo\Plugins\NotFoundPlugin;
-use PhalconDemo\Plugins\SecurityPlugin;
+use PhalconDemo\Plugins\Acl\Resource;
+use PhalconDemo\Plugins\Acl\SecurityPlugin;
 use Phalcon\Mvc\Router;
 
 /**
@@ -24,14 +25,19 @@ $di = new FactoryDefault;
 
 $eventsManager = new EventsManager;
 
+$di->setShared('eventsManager', $eventsManager);
+
 /**
  * We register the events manager
  */
 $di->setShared('dispatcher', function () use ($di, $eventsManager) {
+    $securityPlugin = new SecurityPlugin;
+    $securityPlugin->setResources(new Resource);
+
     /**
      * Check if the user is allowed to access certain action using the SecurityPlugin
      */
-    $eventsManager->attach('dispatch:beforeDispatch', new SecurityPlugin);
+    $eventsManager->attach('dispatch:beforeDispatch', $securityPlugin);
 
     /**
      * Handle exceptions and not-found exceptions using NotFoundPlugin
@@ -67,10 +73,10 @@ $di->setShared('view', function () use ($config, $di, $eventsManager) {
             '.volt'  => function ($view, $di) use ($config) {
                 $volt = new Volt($view, $di);
 
-                $compiledPath = APP_STAGE == APP_TEST ? DOCROOT . 'tests/_cache/' : DOCROOT . $config->get('volt')->cacheDir;
+                $path = APP_STAGE == APP_TEST ? DOCROOT . 'tests/_cache/' : DOCROOT . $config->get('volt')->cacheDir;
 
                 $options = [
-                    'compiledPath'      => $compiledPath,
+                    'compiledPath'      => $path,
                     'compiledExtension' => $config->get('volt')->compiledExt,
                     'compiledSeparator' => $config->get('volt')->separator,
                     'compileAlways'     => APP_STAGE !== APP_PRODUCTION,
@@ -79,10 +85,10 @@ $di->setShared('view', function () use ($config, $di, $eventsManager) {
                 $volt->setOptions($options);
 
                 $volt->getCompiler()
-                    ->addFunction('strtotime',   'strtotime')
-                    ->addFunction('sprintf',     'sprintf')
+                    ->addFunction('strtotime', 'strtotime')
+                    ->addFunction('sprintf', 'sprintf')
                     ->addFunction('str_replace', 'str_replace')
-                    ->addFunction('is_a',        'is_a');
+                    ->addFunction('is_a', 'is_a');
 
                 return $volt;
             },
@@ -140,37 +146,10 @@ $di->set('session', function () {
 });
 
 /**
- * Router
+ * Add routing capabilities
  */
 $di->setShared('router', function () use ($eventsManager) {
-    $routes = include APP_PATH . 'config/routes.php';
-
-    $router = new Router(false);
-
-    if (!isset($_GET['_url'])) {
-        $router->setUriSource(Router::URI_SOURCE_SERVER_REQUEST_URI);
-    }
-
-    $router->removeExtraSlashes(true);
-
-    foreach ($routes as $route => $items) {
-        $route = $router->add($route, $items['params']);
-
-        if (isset($items['hostname'])) {
-            $route->setHostname($items['hostname']);
-        }
-
-        if (isset($items['name'])) {
-            $route->setName($items['name']);
-        }
-    }
-
-    $router->setDefaultController('index');
-    $router->setDefaultAction('index');
-    $router->setDefaultNamespace('PhalconDemo\Controllers');
-    $router->setEventsManager($eventsManager);
-
-    return $router;
+    return require APP_PATH . 'config/routes.php';
 });
 
 /**
