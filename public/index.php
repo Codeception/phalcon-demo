@@ -26,6 +26,7 @@ try {
     require APP_PATH . 'config/services.php';
 
     $application = new Application($di);
+    $application->setEventsManager($eventsManager);
 
     if (APP_STAGE == APP_TEST) {
         return $application;
