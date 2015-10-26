@@ -69,7 +69,7 @@ class Elements extends Component
     public function getMenu()
     {
         $auth = $this->session->get('auth');
-        if ($auth) {
+        if (isset($auth['id'])) {
             $this->headerMenu['navbar-right'] = [
                 'profile' => [
                     'caption' => 'Profile',
@@ -94,7 +94,14 @@ class Elements extends Component
                 } else {
                     echo '<li>';
                 }
-                echo $this->tag->linkTo($controller . '/' . $option['action'], $option['caption']);
+
+                $link = $controller . '/' . $option['action'];
+
+                if (isset($option['params'])) {
+                    $link .= '/' . $option['params'];
+                }
+
+                echo $this->tag->linkTo($link, $option['caption']);
                 echo '</li>';
             }
             echo '</ul>';

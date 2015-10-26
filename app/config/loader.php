@@ -20,4 +20,3 @@ $loader->registerNamespaces(
 );
 
 $loader->register();
-
