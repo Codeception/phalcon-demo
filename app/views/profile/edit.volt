@@ -5,7 +5,7 @@
 {{ content() }}
 
 <div class="profile">
-    {{ form('invoices/profile', 'id': 'profileForm', 'onbeforesubmit': 'return false', 'class': 'form-horizontal') }}
+    {{ form('profile/edit', 'id': 'profileForm', 'onbeforesubmit': 'return false', 'class': 'form-horizontal') }}
         <div class="form-group">
             <label for="name" class="col-sm-2 control-label">Full Name:</label>
             <div class="col-sm-10">
