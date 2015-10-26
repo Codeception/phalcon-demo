@@ -20,10 +20,10 @@ class NotFoundPlugin extends Plugin
      *
      * @param Event $event
      * @param MvcDispatcher $dispatcher
-     * @param Exception $exception
+     * @param \Exception $exception
      * @return boolean
      */
-    public function beforeException(Event $event, MvcDispatcher $dispatcher, Exception $exception)
+    public function beforeException(Event $event, MvcDispatcher $dispatcher, \Exception $exception)
     {
         error_log($exception->getMessage() . PHP_EOL . $exception->getTraceAsString());
 
