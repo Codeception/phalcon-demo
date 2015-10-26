@@ -1,6 +1,6 @@
 <?php
 
-namespace PhalconDemo\Plugins;
+namespace PhalconDemo\Plugins\Acl;
 
 use Phalcon\Acl;
 use Phalcon\Acl\Role;
@@ -9,6 +9,7 @@ use Phalcon\Events\Event;
 use Phalcon\Mvc\User\Plugin;
 use Phalcon\Mvc\Dispatcher;
 use Phalcon\Acl\Adapter\Memory as AclList;
+use PhalconDemo\Plugins\Acl\Resource\ResourceInterface;
 
 /**
  * SecurityPlugin
@@ -17,6 +18,24 @@ use Phalcon\Acl\Adapter\Memory as AclList;
  */
 class SecurityPlugin extends Plugin
 {
+    /**
+     * @var ResourceInterface
+     */
+    protected $resource;
+
+    /**
+     * Set resources
+     *
+     * @param ResourceInterface $resource
+     * @return $this
+     */
+    public function setResources(ResourceInterface $resource)
+    {
+        $this->resource = $resource;
+
+        return $this;
+    }
+
     /**
      * Returns an existing or new access control list
      *
@@ -45,46 +64,25 @@ class SecurityPlugin extends Plugin
                 $acl->addRole($role);
             }
 
-            // Private area resources
-            $privateResources = [
-                'companies'    => ['index', 'search', 'new', 'edit', 'save', 'create', 'delete'],
-                'products'     => ['index', 'search', 'new', 'edit', 'save', 'create', 'delete'],
-                'producttypes' => ['index', 'search', 'new', 'edit', 'save', 'create', 'delete'],
-                'invoices'     => ['index'],
-                'profile'      => ['edit']
-            ];
+            if ($this->resource instanceof ResourceInterface) {
+                foreach ($this->resource->getAllResources() as $resource => $actions) {
+                    $acl->addResource(new Resource($resource), $actions);
+                }
 
-            foreach ($privateResources as $resource => $actions) {
-                $acl->addResource(new Resource($resource), $actions);
-            }
-
-            // Public area resources
-            $publicResources = [
-                'index'      => ['index'],
-                'about'      => ['index'],
-                'register'   => ['index'],
-                'errors'     => ['show401', 'show404', 'show500'],
-                'session'    => ['index', 'register', 'start', 'end'],
-                'contact'    => ['index', 'send']
-            ];
-
-            foreach ($publicResources as $resource => $actions) {
-                $acl->addResource(new Resource($resource), $actions);
-            }
-
-            //Grant access to public areas to both users and guests
-            foreach ($roles as $role) {
-                foreach ($publicResources as $resource => $actions) {
-                    foreach ($actions as $action) {
-                        $acl->allow($role->getName(), $resource, $action);
+                // Grant access to public areas to both users and guests
+                foreach ($roles as $role) {
+                    foreach ($this->resource->getPublicResources() as $resource => $actions) {
+                        foreach ($actions as $action) {
+                            $acl->allow($role->getName(), $resource, $action);
+                        }
                     }
                 }
-            }
 
-            // Grant access to private area to role Users
-            foreach ($privateResources as $resource => $actions) {
-                foreach ($actions as $action) {
-                    $acl->allow('Users', $resource, $action);
+                // Grant access to private area to role Users
+                foreach ($this->resource->getPrivateResources() as $resource => $actions) {
+                    foreach ($actions as $action) {
+                        $acl->allow('Users', $resource, $action);
+                    }
                 }
             }
 
@@ -116,10 +114,23 @@ class SecurityPlugin extends Plugin
         $acl = $this->getAcl();
 
         if (!$acl->isResource($controller)) {
-            $dispatcher->forward([
-                'controller' => 'errors',
-                'action'     => 'show404'
-            ]);
+            $dispatcher->forward(
+                [
+                    'controller' => 'errors',
+                    'action'     => 'show404'
+                ]
+            );
+
+            return false;
+        }
+
+        if (!$this->resource->hasAccess($controller, $action)) {
+            $dispatcher->forward(
+                [
+                    'controller' => 'errors',
+                    'action'     => 'show404'
+                ]
+            );
 
             return false;
         }
@@ -127,10 +138,12 @@ class SecurityPlugin extends Plugin
         $allowed = $acl->isAllowed($role, $controller, $action);
 
         if ($allowed != Acl::ALLOW) {
-            $dispatcher->forward([
-                'controller' => 'errors',
-                'action'     => 'show401'
-            ]);
+            $dispatcher->forward(
+                [
+                    'controller' => 'errors',
+                    'action'     => 'show401'
+                ]
+            );
 
             $this->session->destroy();
             return false;
