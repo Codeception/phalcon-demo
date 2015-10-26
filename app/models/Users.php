@@ -13,6 +13,9 @@ use Phalcon\Mvc\Model\Validator\Uniqueness as UniquenessValidator;
  */
 class Users extends Model
 {
+    const STATUS_ACTIVE   = 'Y';
+    const STATUS_INACTIVE = 'N';
+
     /**
      * @var integer
      */
@@ -50,19 +53,26 @@ class Users extends Model
 
     public function validation()
     {
-        $this->validate(new EmailValidator([
-            'field' => 'email'
-        ]));
-        $this->validate(new UniquenessValidator([
-            'field' => 'email',
-            'message' => 'Sorry, The email was registered by another user'
-        ]));
-        $this->validate(new UniquenessValidator([
-            'field' => 'username',
-            'message' => 'Sorry, That username is already taken'
-        ]));
-        if ($this->validationHasFailed() == true) {
-            return false;
-        }
+        $this->validate(new EmailValidator(
+            [
+                'field' => 'email'
+            ]
+        ));
+
+        $this->validate(new UniquenessValidator(
+            [
+                'field'   => 'email',
+                'message' => 'Sorry, The email was registered by another user'
+            ]
+        ));
+
+        $this->validate(new UniquenessValidator(
+            [
+                'field'   => 'username',
+                'message' => 'Sorry, That username is already taken'
+            ]
+        ));
+
+        return false == $this->validationHasFailed();
     }
 }
