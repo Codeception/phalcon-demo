@@ -89,13 +89,19 @@ and `app/config/config.ini.dev` files.
 If you cannot run the tests, please refer to the `.travis.yml` file for more instructions how we test Phalcon Demo Application.
 For detailed information on our application environment setting refer to `app/config/env.php` file.
 
+### Functional Tests
+
+Demonstrates testing of CRUD application with:
+
+* [UserObjects][9]
+
 ## Contributing
 
-See [CONTRIBUTING.md][9]
+See [CONTRIBUTING.md][15]
 
 ## License
 
-Phalcon Demo Application is open-sourced software licensed under the [New BSD License][10].<br>
+Phalcon Demo Application is open-sourced software licensed under the [New BSD License][16].<br>
 © 2012 - 2015 Phalcon Framework Team and contributors<br>
 © 2015 Codeception Team and contributors
 
@@ -107,5 +113,8 @@ Phalcon Demo Application is open-sourced software licensed under the [New BSD Li
 [6]: http://codeception.com/
 [7]: http://codeception.com/docs/01-Introduction
 [8]: http://codeception.com/docs/reference/Commands
-[9]: https://github.com/phalcon/invo/blob/master/CONTRIBUTING.md
-[10]: https://github.com/phalcon/invo/blob/master/docs/LICENSE.md
+[9]: https://github.com/Codeception/phalcon-demo/blob/master/tests/_support/User/Functional/UserSteps.php
+[15]: https://github.com/phalcon/invo/blob/master/CONTRIBUTING.md
+[16]: https://github.com/phalcon/invo/blob/master/docs/LICENSE.md
+
+User/Functional/UserSteps.php
