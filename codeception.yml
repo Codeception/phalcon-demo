@@ -33,7 +33,3 @@ modules:
             dump: tests/_data/dump.sql
             populate: true
             cleanup: true
-        Phalcon2:
-            bootstrap: public/index.php
-            cleanup: true
-            savepoints: true

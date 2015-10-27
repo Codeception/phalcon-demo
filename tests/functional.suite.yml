@@ -8,6 +8,9 @@ class_name: FunctionalTester
 modules:
     enabled:
         # add framework module here
-        - \Helper\Functional
+        - Helper\Functional
         - Asserts
-        - Phalcon2
+        - Phalcon2:
+            bootstrap: public/index.php
+            cleanup: true
+            savepoints: true
