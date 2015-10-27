@@ -36,6 +36,13 @@ class ProfileController extends ControllerBase
                 }
             } else {
                 $this->flash->success('Your profile information was updated successfully');
+
+                $auth = [
+                    'id'   => $user->id,
+                    'name' => $user->name
+                ];
+
+                $this->session->set('auth', $auth);
             }
         }
     }
