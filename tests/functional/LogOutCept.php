@@ -14,5 +14,5 @@ $I->haveInSession('auth', [
 
 $I->amOnPage('/');
 $I->click('Log Out');
-$I->see('Goodbye!');
+$I->see('Goodbye Phalcon Demo!');
 $I->seeInCurrentUrl('/session/end');

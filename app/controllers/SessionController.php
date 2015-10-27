@@ -70,8 +70,15 @@ class SessionController extends ControllerBase
      */
     public function endAction()
     {
-        $this->session->remove('auth');
-        $this->flash->success('Goodbye!');
+        if ($auth = $this->session->get('auth')) {
+            $user = Users::findFirstById($auth['id']);
+
+            $name = $user ? $user->name : '';
+            $this->flash->success("Goodbye {$name}!");
+
+            $this->session->remove('auth');
+        }
+
         return $this->forward('index/index');
     }
 }
