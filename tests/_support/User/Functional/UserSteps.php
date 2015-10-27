@@ -2,7 +2,14 @@
 
 namespace User\Functional;
 
-class UserSteps extends \FunctionalTester
+use FunctionalTester;
+
+/**
+ * Class UserSteps
+ *
+ * @package User\Functional
+ */
+class UserSteps extends FunctionalTester
 {
     public function amRegularUser()
     {
