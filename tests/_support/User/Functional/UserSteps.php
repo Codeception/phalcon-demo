@@ -1,10 +1,9 @@
 <?php
 
-namespace Step\Functional;
+namespace User\Functional;
 
 class UserSteps extends \FunctionalTester
 {
-
     public function amRegularUser()
     {
         $I = $this;

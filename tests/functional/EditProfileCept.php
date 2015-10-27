@@ -3,7 +3,7 @@
  * @var \Codeception\Scenario $scenario
  */
 
-$I = new Step\Functional\UserSteps($scenario);
+$I = new User\Functional\UserSteps($scenario);
 
 $I->wantTo('edit a profile');
 
