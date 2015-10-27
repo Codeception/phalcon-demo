@@ -32,7 +32,7 @@ modules:
             password: ''
             dump: tests/_data/dump.sql
             populate: true
-            cleanup: false
+            cleanup: true
         Phalcon2:
             bootstrap: public/index.php
             cleanup: true
