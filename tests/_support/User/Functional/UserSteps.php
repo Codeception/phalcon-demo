@@ -9,25 +9,61 @@ use FunctionalTester;
  *
  * @package User\Functional
  */
-class UserSteps extends FunctionalTester
+class UserSteps
 {
-    public function amRegularUser()
+    /**
+     * @var FunctionalTester
+     */
+    protected $tester;
+
+    protected $formFields = [
+        'email'    => 'i_regular@phalcon-demo.local',
+        'password' => 'password',
+        'username' => 'Regular User',
+        'name'     => 'i_regular',
+        'active'   => 'Y',
+    ];
+
+    public function __construct(FunctionalTester $I)
     {
-        $I = $this;
+        $this->tester = $I;
+    }
 
-        $id = $I->haveRecord('PhalconDemo\Models\Users', [
-            'username' => 'i_regular',
-            'password' => 'password',
-            'name'     => 'Regular User',
-            'email'    => 'i_regular@phalcon-demo.local',
-            'active'   => 'Y'
+    /**
+     * @return int
+     */
+    public function createUser()
+    {
+        $I = $this->tester;
+
+        return $I->haveRecord('PhalconDemo\Models\Users', $this->formFields);
+    }
+
+    /**
+     * @return void
+     * @throws \Exception
+     */
+    public function loginAsFirstUser()
+    {
+        $I = $this->tester;
+
+        $I->amOnPage('/login');
+        $this->fillFormFields([
+            'email'    => 'demo@phalconphp.com',
+            'password' => 'phalcon'
         ]);
+        $I->click('Login');
+        $I->amOnPage('/session/start');
+    }
 
-        $I->haveInSession('auth', [
-            'id'   => $id,
-            'name' => 'Regular User'
-        ]);
+    protected function fillFormFields(array $data)
+    {
+        foreach ($data as $field => $value) {
+            if (!isset($this->formFields[$field])) {
+                throw new \Exception("Form field  $field does not exist");
+            }
 
-        return $id;
+            $this->tester->fillField($field, $value);
+        }
     }
 }
