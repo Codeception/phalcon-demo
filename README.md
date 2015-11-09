@@ -93,7 +93,7 @@ For detailed information on our application environment setting refer to `app/co
 
 Demonstrates testing of CRUD application with:
 
-* [UserObjects][9]
+* [UserSteps][9]
 
 ## Contributing
 
