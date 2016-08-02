@@ -107,7 +107,6 @@ class Elements extends Component
             echo '</ul>';
             echo '</div>';
         }
-
     }
 
     /**

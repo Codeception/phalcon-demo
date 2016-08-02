@@ -2,7 +2,7 @@
 #
 # Suite for functional (integration) tests
 # Emulate web requests and make application process them
-# Include one of framework modules (Symfony2, Yii2, Laravel5) to use it
+# Include one of framework modules (Phalcon, Symfony2, Yii2, Laravel5) to use it
 
 class_name: FunctionalTester
 modules:
@@ -10,7 +10,7 @@ modules:
         # add framework module here
         - Helper\Functional
         - Asserts
-        - Phalcon2:
+        - Phalcon:
             bootstrap: public/index.php
             cleanup: true
             savepoints: true
