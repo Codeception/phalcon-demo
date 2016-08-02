@@ -3,8 +3,9 @@
 namespace PhalconDemo\Models;
 
 use Phalcon\Mvc\Model;
-use Phalcon\Mvc\Model\Validator\Email as EmailValidator;
-use Phalcon\Mvc\Model\Validator\Uniqueness as UniquenessValidator;
+use Phalcon\Validation;
+use Phalcon\Validation\Validator\Email as EmailValidator;
+use Phalcon\Validation\Validator\Uniqueness as UniquenessValidator;
 
 /**
  * Users Model
@@ -53,26 +54,22 @@ class Users extends Model
 
     public function validation()
     {
-        $this->validate(new EmailValidator(
-            [
-                'field' => 'email'
-            ]
-        ));
+        $validator = new Validation();
 
-        $this->validate(new UniquenessValidator(
-            [
-                'field'   => 'email',
+        $validator->add(
+            'email',
+            new EmailValidator([
+                'model' => $this,
                 'message' => 'Sorry, The email was registered by another user'
-            ]
-        ));
+            ])
+        );
 
-        $this->validate(new UniquenessValidator(
-            [
-                'field'   => 'username',
-                'message' => 'Sorry, That username is already taken'
-            ]
-        ));
-
-        return false == $this->validationHasFailed();
+        $validator->add(
+            'username',
+            new UniquenessValidator([
+                'model' => $this,
+                'message' => 'Sorry, That username is already taken',
+            ])
+        );
     }
 }

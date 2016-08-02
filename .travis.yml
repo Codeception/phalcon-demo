@@ -1,17 +1,22 @@
 language: php
 
 php:
-  - 5.4
   - 5.5
   - 5.6
+  - 7.0
+
+matrix:
+  include:
+    - php: 5.4
+      env: PHALCON=2.1.x
 
 sudo: false
 
 install:
   - composer self-update
-
-  - git clone -q --depth=1 https://github.com/phalcon/cphalcon.git
-  - (cd cphalcon/ext; export CFLAGS="-g0 -O0 -std=gnu90"; phpize &> /dev/null && ./configure --silent --enable-phalcon &> /dev/null && make --silent -j2 &> /dev/null && make --silent install && phpenv config-add ../unit-tests/ci/phalcon.ini &> /dev/null)
+  - '[[ -z "$PHALCON" ]] || git clone -q --depth=1 https://github.com/phalcon/cphalcon.git -b $PHALCON'
+  - '[[ ! -z "$PHALCON" ]] || git clone -q --depth=1 https://github.com/phalcon/cphalcon.git'
+  - '(cd cphalcon/build; bash install &>/dev/null && phpenv config-add ../tests/_ci/phalcon.ini &> /dev/null && cd ../..;)'
   - php -r 'echo \Phalcon\Version::get() . PHP_EOL;'
   - travis_retry composer install --prefer-dist --no-interaction
 
