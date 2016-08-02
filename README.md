@@ -102,7 +102,7 @@ See [CONTRIBUTING.md][15]
 ## License
 
 Phalcon Demo Application is open-sourced software licensed under the [New BSD License][16].<br>
-© 2012 - 2015 Phalcon Framework Team and contributors<br>
+© 2012 - 2016 Phalcon Framework Team and contributors<br>
 © 2015 Codeception Team and contributors
 
 [1]: https://github.com/phalcon/invo/
