@@ -20,7 +20,7 @@ switch to the relevant branch.
 
 ### Requirements
 
-* PHP >= 5.4
+* PHP >= 5.5
 * [Nginx][2] Web Server with [PHP-FPM][3] enabled
 * Latest stable [Phalcon Framework release][4] extension enabled
 * [MySQL][5] >= 5.1.5
@@ -115,6 +115,6 @@ Phalcon Demo Application is open-sourced software licensed under the [New BSD Li
 [8]: http://codeception.com/docs/reference/Commands
 [9]: https://github.com/Codeception/phalcon-demo/blob/master/tests/_support/User/Functional/UserSteps.php
 [15]: https://github.com/phalcon/invo/blob/master/CONTRIBUTING.md
-[16]: https://github.com/phalcon/invo/blob/master/docs/LICENSE.md
+[16]: https://github.com/phalcon/invo/blob/master/LICENSE.txt
 
 User/Functional/UserSteps.php
