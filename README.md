@@ -151,5 +151,5 @@ Phalcon Demo Application is open-sourced software licensed under the [New BSD Li
 [7]: http://codeception.com/docs/01-Introduction
 [8]: http://codeception.com/docs/reference/Commands
 [9]: https://github.com/Codeception/phalcon-demo/blob/master/tests/_support/User/Functional/UserSteps.php
-[15]: https://github.com/phalcon/invo/blob/master/CONTRIBUTING.md
-[16]: https://github.com/phalcon/invo/blob/master/LICENSE.txt
+[15]: https://github.com/Codeception/phalcon-demo/blob/master/CONTRIBUTING.md
+[16]: https://github.com/Codeception/phalcon-demo/blob/master/LICENSE.txt
