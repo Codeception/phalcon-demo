@@ -17,6 +17,9 @@ env:
 git:
   depth: 1
 
+services:
+  - mysql
+
 install:
   - composer self-update
   - git clone --depth=1 -q --branch=${PHALCON_VERSION} https://github.com/phalcon/cphalcon.git
@@ -25,8 +28,8 @@ install:
   - travis_retry composer install --prefer-dist --no-interaction
 
 before_script:
-  - mysql -e 'CREATE DATABASE phalcon_demo CHARSET=utf8 COLLATE=utf8_unicode_ci;'
-  - cat schemas/phalcon_demo.sql | mysql phalcon_demo
+  - echo 'CREATE DATABASE phalcon_demo CHARSET=utf8 COLLATE=utf8_unicode_ci' | mysql -u root
+  - cat schemas/phalcon_demo.sql | mysql -u root phalcon_demo
 
 script:
   - vendor/bin/phpcs
@@ -35,6 +38,13 @@ script:
 
 after_script:
   - mysql -e 'DROP DATABASE phalcon_demo;'
+
+addons:
+  apt:
+    packages:
+    - mysql-server-5.6
+    - mysql-client-core-5.6
+    - mysql-client-5.6
 
 notifications:
   email:
