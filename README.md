@@ -1,6 +1,6 @@
 # Phalcon Demo Application 
 
-[![Build Status](https://travis-ci.org/Codeception/phalcon-demo.svg?branch=master)](https://travis-ci.org/Codeception/phalcon-demo)
+[![Build Status](https://travis-ci.org/Codeception/phalcon-demo.svg?branch=master)][phalcon-demo]
 
 We use **modified** [Phalcon INVO Application][1] to demonstrate basics of Codeception testing.
 We expect to implement as many features as possible to showcase the framework and its
@@ -28,6 +28,37 @@ switch to the relevant branch.
 
 ### Installation
 
+#### The Composer way (recommended)
+
+Using Composer, you can create a new project, write this code on your terminal:
+
+```sh
+composer create-project codeception/phalcon-demo --prefer-dist <folder name>
+```
+
+After running this command, there should be an output, similar below:
+
+```
+Installing codeception/phalcon-demo (version)
+  - Installing codeception/phalcon-demo (version)
+
+Created project in <folder name>
+Loading composer repositories with package information
+Updating dependencies (including require-dev)
+
+...
+...
+...
+
+Writing lock file
+Generating autoload files
+Do you want to remove the existing VCS (.git, .svn..) history? [Y,n]? y
+```
+
+#### The Git way
+
+Another way to fetch project by using `git clone`:
+
 First you need to clone this repository:
 
 ```sh
@@ -46,14 +77,27 @@ Then install dependencies:
 $ php composer.phar install
 ```
 
-You'll need to create the database and initialize schema:
+#### Setup Database
+
+A MySQL database is also bundled in this project. The connection to the database is required for several tests.
+You'll need to create the database and initialize schema.
+
+You can create a database as follows:
 
 ```sh
-$ echo 'CREATE DATABASE phalcon_demo CHARSET=utf8 COLLATE=utf8_unicode_ci' | mysql -u root
-$ cat schemas/phalcon_demo.sql | mysql -u root phalcon_demo
+echo 'CREATE DATABASE phalcon_demo CHARSET=utf8 COLLATE=utf8_unicode_ci' | mysql -u root
 ```
 
-Also you can override application config by creating `app/config/config.ini.dev` (already gitignored).
+then initialize schema:
+
+```
+cat schemas/phalcon_demo.sql | mysql -u root phalcon_demo
+```
+
+**Note:**
+
+For these tests we use the user `root` without a password. You may need to change this in `tests/codeception.yml`.
+You can override application config by creating `app/config/config.ini.dev` (already gitignored).
 
 ## Tests
 
@@ -78,15 +122,6 @@ Read more about the installation and configuration of Codeception:
 * [Codeception Introduction][7]
 * [Codeception Console Commands][8]
 
-Some tests require a connection to the database. For those you need to create a test database using MySQL:
-
-```sh
-$ echo 'CREATE DATABASE phalcon_demo CHARSET=utf8 COLLATE=utf8_unicode_ci' | mysql -u root
-```
-
-For these tests we use the user `root` without a password. You may need to change this in `tests/codeception.yml`
-and `app/config/config.ini.dev` files.
-
 If you cannot run the tests, please refer to the `.travis.yml` file for more instructions how we test Phalcon Demo Application.
 For detailed information on our application environment setting refer to `app/config/env.php` file.
 
@@ -104,8 +139,9 @@ See [CONTRIBUTING.md][15]
 
 Phalcon Demo Application is open-sourced software licensed under the [New BSD License][16].<br>
 © 2012 - 2016 Phalcon Framework Team and contributors<br>
-© 2015 Codeception Team and contributors
+© 2015 - 2016 Codeception Team and contributors
 
+[phalcon-demo]: https://travis-ci.org/Codeception/phalcon-demo
 [1]: https://github.com/phalcon/invo/
 [2]: http://nginx.org/
 [3]: http://php.net/manual/en/install.fpm.php
@@ -117,5 +153,3 @@ Phalcon Demo Application is open-sourced software licensed under the [New BSD Li
 [9]: https://github.com/Codeception/phalcon-demo/blob/master/tests/_support/User/Functional/UserSteps.php
 [15]: https://github.com/phalcon/invo/blob/master/CONTRIBUTING.md
 [16]: https://github.com/phalcon/invo/blob/master/LICENSE.txt
-
-User/Functional/UserSteps.php
