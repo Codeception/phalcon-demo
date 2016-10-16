@@ -12,19 +12,22 @@
   "authors": [
     {
       "name": "Phalcon Team",
-      "email": "team@phalconphp.com"
+      "email": "team@phalconphp.com",
+      "homepage": "https://phalconphp.com/en/team"
     },
     {
       "name": "Codeception Team",
-      "email": "davert@codegyre.com"
+      "email": "team@codeception.com",
+      "homepage": "http://codeception.com/"
     }
+
   ],
   "require": {
     "php": ">=5.4",
     "ext-phalcon": ">=2.0.9"
   },
   "require-dev": {
-    "squizlabs/php_codesniffer": "2.*",
+    "squizlabs/php_codesniffer": "~2.7",
     "codeception/codeception": "~2.2"
   }
 }

@@ -20,7 +20,7 @@ switch to the relevant branch.
 
 ### Requirements
 
-* PHP >= 5.5
+* PHP >= 5.4
 * [Nginx][2] Web Server with [PHP-FPM][3] enabled
 * Latest stable [Phalcon Framework release][4] extension enabled
 * [MySQL][5] >= 5.1.5
