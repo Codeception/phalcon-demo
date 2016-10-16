@@ -5,34 +5,39 @@ php:
   - 5.6
   - 7.0
 
-matrix:
-  include:
-    - php: 5.4
-      env: PHALCON=2.1.x
+env:
+  matrix:
+    - PHALCON_VERSION="3.0.x"
+    - PHALCON_VERSION="v3.0.0"
+    - PHALCON_VERSION="v3.0.1"
 
 sudo: false
 
+git:
+  depth: 1
+
 install:
   - composer self-update
-  - '[[ -z "$PHALCON" ]] || git clone -q --depth=1 https://github.com/phalcon/cphalcon.git -b $PHALCON'
-  - '[[ ! -z "$PHALCON" ]] || git clone -q --depth=1 https://github.com/phalcon/cphalcon.git'
+  - git clone --depth=1 -q --branch=${PHALCON_VERSION} https://github.com/phalcon/cphalcon.git
   - '(cd cphalcon/build; bash install &>/dev/null && phpenv config-add ../tests/_ci/phalcon.ini &> /dev/null && cd ../..;)'
-  - php -r 'echo \Phalcon\Version::get() . PHP_EOL;'
+  - php --ri phalcon
   - travis_retry composer install --prefer-dist --no-interaction
 
 before_script:
   - mysql -e 'CREATE DATABASE phalcon_demo CHARSET=utf8 COLLATE=utf8_unicode_ci;'
   - cat schemas/phalcon_demo.sql | mysql phalcon_demo
 
+script:
+  - vendor/bin/phpcs
+  - vendor/bin/codecept build
+  - vendor/bin/codecept run
 
 after_script:
   - mysql -e 'DROP DATABASE phalcon_demo;'
 
-script:
-  - vendor/bin/phpcs --standard=PSR2 --encoding=utf-8 app/controllers/ app/forms/ app/library/ app/models/ app/plugins/
-  - vendor/bin/codecept build
-  - vendor/bin/codecept run
-
 notifications:
   email:
-    - serghei@phalconphp.com
+    recipients:
+      - build@phalconphp.com
+    on_success: change
+    on_failure: always
