@@ -24,6 +24,7 @@ switch to the relevant branch.
 * [Nginx][2] Web Server with [PHP-FPM][3] enabled
 * Latest stable [Phalcon Framework release][4] extension enabled
 * [MySQL][5] >= 5.1.5
+* Codeception >= 2.2
 
 ### Installation
 

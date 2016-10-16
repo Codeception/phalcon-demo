@@ -54,7 +54,7 @@ Phalcon Team
 
 [pr]: https://help.github.com/articles/using-pull-requests
 [forum]: https://forum.phalconphp.com
-[forum-qa]: https://phptest.club/
+[forum-qa]: http://phptest.club/
 [srt]: https://github.com/phalcon/cphalcon/wiki/Submit-Reproducible-Test
 [gb]: https://github.com/phalcon/cphalcon/wiki/Generating-a-backtrace
 [support]: https://phalconphp.com/support
