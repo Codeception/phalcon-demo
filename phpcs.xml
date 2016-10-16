@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<ruleset name="Phalcon Phalcon Demo Application">
+    <description>Phalcon Phalcon Demo Application Coding Standards</description>
+
+    <!-- Show colors in console -->
+    <arg value="-colors"/>
+
+    <!-- Show sniff codes in all reports -->
+    <arg value="s"/>
+
+    <!-- Use PSR-2 as a base -->
+    <rule ref="PSR2"/>
+
+    <file>app/controllers</file>
+    <file>app/forms</file>
+    <file>app/library</file>
+    <file>app/models</file>
+    <file>app/plugins</file>
+</ruleset>
