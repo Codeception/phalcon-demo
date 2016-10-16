@@ -1,5 +1,5 @@
 > Questions should go to https://forum.phalconphp.com or http://phptest.club/
-> Documentation issues should go to https://github.com/phalcon/docs/issues or http://codeception.com/docs/
+> Phalcon documentation issues should go to https://github.com/phalcon/docs/issues
 
 ### Expected and Actual Behavior
 
