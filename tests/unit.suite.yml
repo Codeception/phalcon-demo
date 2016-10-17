@@ -6,4 +6,8 @@ class_name: UnitTester
 modules:
     enabled:
         - Asserts
-        - \Helper\Unit
+        - Helper\Unit
+        - Phalcon:
+            bootstrap: public/index.php
+            cleanup: true
+            savepoints: true

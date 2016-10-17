@@ -29,5 +29,10 @@
   "require-dev": {
     "squizlabs/php_codesniffer": "~2.7",
     "codeception/codeception": "~2.2"
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "App\\Test\\Unit\\": "tests/unit/"
+    }
   }
 }
