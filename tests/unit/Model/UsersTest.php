@@ -2,6 +2,7 @@
 
 namespace App\Test\Unit\Models;
 
+use UnitTester;
 use Codeception\Test\Unit;
 use PhalconDemo\Models\Users;
 
@@ -12,6 +13,12 @@ class UsersTest extends Unit
      * @var Users
      */
     protected $user;
+
+    /**
+     * UnitTester Object
+     * @var UnitTester
+     */
+    protected $tester;
 
     protected function _before()
     {
