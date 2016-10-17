@@ -45,9 +45,9 @@ define('APP_DEVELOPMENT', 'development');
 define('APP_TEST', 'testing');
 
 /**
- * @const APP_DEVELOPMENT Current application stage
+ * @const APPLICATION_ENV Current application environment
  */
-defined('APP_STAGE') || define('APP_STAGE', (getenv('APP_ENV') ? getenv('APP_ENV') : APP_PRODUCTION));
+defined('APPLICATION_ENV') || define('APPLICATION_ENV', (getenv('APPLICATION_ENV') ? getenv('APPLICATION_ENV') : APP_PRODUCTION));
 
 /**
  * @const APP_START_TIME The start time of the application, used for profiling
@@ -92,7 +92,7 @@ if (function_exists('mb_substitute_character')) {
  * Enable xdebug parameter collection in development mode to improve fatal stack traces.
  * Highly recommends use at least XDebug 2.2.3 for a better compatibility with Phalcon
  */
-if (APP_STAGE != APP_PRODUCTION && extension_loaded('xdebug')) {
+if (APPLICATION_ENV != APP_PRODUCTION && extension_loaded('xdebug')) {
     ini_set('xdebug.collect_vars', 'on');
     ini_set('xdebug.collect_params', 4);
     ini_set('xdebug.dump_globals', 'on');

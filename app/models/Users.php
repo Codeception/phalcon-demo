@@ -71,5 +71,7 @@ class Users extends Model
                 'message' => 'Sorry, That username is already taken',
             ])
         );
+
+        return $this->validate($validator);
     }
 }

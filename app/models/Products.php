@@ -59,9 +59,6 @@ class Products extends Model
      */
     public function getActiveDetail()
     {
-        if ($this->active == 'Y') {
-            return 'Yes';
-        }
-        return 'No';
+        return $this->active == 'Y' ? 'Yes' : 'No';
     }
 }

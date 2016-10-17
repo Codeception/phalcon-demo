@@ -28,7 +28,7 @@ try {
     $application = new Application($di);
     $application->setEventsManager($eventsManager);
 
-    if (APP_STAGE == APP_TEST) {
+    if (APPLICATION_ENV == APP_TEST) {
         return $application;
     } else {
         echo $application->handle()->getContent();

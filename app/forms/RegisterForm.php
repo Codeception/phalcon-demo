@@ -5,8 +5,8 @@ namespace PhalconDemo\Forms;
 use Phalcon\Forms\Form;
 use Phalcon\Forms\Element\Text;
 use Phalcon\Forms\Element\Password;
-use Phalcon\Validation\Validator\PresenceOf;
 use Phalcon\Validation\Validator\Email;
+use Phalcon\Validation\Validator\PresenceOf;
 
 class RegisterForm extends Form
 {
