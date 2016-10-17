@@ -2,11 +2,11 @@
 
 namespace PhalconDemo\Plugins;
 
+use Phalcon\Dispatcher;
 use Phalcon\Events\Event;
 use Phalcon\Mvc\User\Plugin;
-use Phalcon\Dispatcher;
-use Phalcon\Mvc\Dispatcher\Exception as DispatcherException;
 use Phalcon\Mvc\Dispatcher as MvcDispatcher;
+use Phalcon\Mvc\Dispatcher\Exception as DispatcherException;
 
 /**
  * NotFoundPlugin
@@ -22,31 +22,44 @@ class NotFoundPlugin extends Plugin
      * @param MvcDispatcher $dispatcher
      * @param \Exception $exception
      * @return boolean
+     * @throws \Exception
      */
-    public function beforeException(Event $event, MvcDispatcher $dispatcher, \Exception $exception)
+    public function beforeException(Event $event, MvcDispatcher $dispatcher, $exception)
     {
-        error_log($exception->getMessage() . PHP_EOL . $exception->getTraceAsString());
-
         if ($exception instanceof DispatcherException) {
             switch ($exception->getCode()) {
-                case Dispatcher::EXCEPTION_HANDLER_NOT_FOUND:
-                case Dispatcher::EXCEPTION_ACTION_NOT_FOUND:
-                    $dispatcher->forward(
-                        [
-                            'controller' => 'errors',
-                            'action'     => 'show404'
-                        ]
-                    );
-                    return false;
+                case Dispatcher::EXCEPTION_INVALID_HANDLER:
+                case Dispatcher::EXCEPTION_CYCLIC_ROUTING:
+                    $action = 'show500';
+                    break;
+                case Dispatcher::EXCEPTION_INVALID_PARAMS:
+                    $action = 'show400';
+                    break;
+                default:
+                    $action = 'show404';
             }
+
+            $dispatcher->forward(
+                [
+                    'controller' => 'errors',
+                    'action'     => $action
+                ]
+            );
+
+            return false;
+        }
+
+        if (APP_PRODUCTION !== APPLICATION_ENV && $exception instanceof \Exception) {
+            throw $exception;
         }
 
         $dispatcher->forward(
             [
                 'controller' => 'errors',
-                'action'     => 'show500'
+                'action'     => 'route500'
             ]
         );
-        return false;
+
+        return $event->isStopped();
     }
 }

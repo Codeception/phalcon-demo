@@ -62,19 +62,19 @@ Another way to fetch project by using `git clone`:
 First you need to clone this repository:
 
 ```sh
-$ git clone git@github.com:Codeception/phalcon-demo.git
+git clone git@github.com:Codeception/phalcon-demo.git
 ```
 
 Install composer in a common location or in your project:
 
 ```sh
-$ curl -s http://getcomposer.org/installer | php
+curl -s http://getcomposer.org/installer | php
 ```
 
 Then install dependencies:
 
 ```sh
-$ php composer.phar install
+php composer.phar install
 ```
 
 #### Setup Database
@@ -106,15 +106,16 @@ Phalcon Demo Application uses [Codeception][6] functional, acceptance and unit t
 First you need to re-generate base classes for all suites:
 
 ```sh
-$ vendor/bin/codecept build
+vendor/bin/codecept build
 ```
 
 You can execute all test with `run` command:
 
 ```sh
-$ vendor/bin/codecept run
-# OR
-$ vendor/bin/codecept run --debug # Detailed output
+vendor/bin/codecept run
+
+# OR detailed output
+vendor/bin/codecept run --debug
 ```
 
 Read more about the installation and configuration of Codeception:

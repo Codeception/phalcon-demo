@@ -12,6 +12,7 @@ class CompaniesController extends ControllerBase
     public function initialize()
     {
         $this->tag->setTitle('Manage your companies');
+
         parent::initialize();
     }
 
@@ -45,7 +46,8 @@ class CompaniesController extends ControllerBase
 
         if (!$companies->count()) {
             $this->flash->notice("The search did not find any companies");
-            return $this->forward("companies/index");
+            $this->forward("companies/index");
+            return;
         }
 
         $paginator = new Paginator([
@@ -79,7 +81,8 @@ class CompaniesController extends ControllerBase
 
             if (!$company) {
                 $this->flash->error("Company was not found");
-                return $this->forward("companies/index");
+                $this->forward("companies/index");
+                return;
             }
 
             $this->view->setVar('form', new CompaniesForm($company, ['edit' => true]));

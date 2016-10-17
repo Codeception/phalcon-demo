@@ -12,6 +12,7 @@ class ProductTypesController extends ControllerBase
     public function initialize()
     {
         $this->tag->setTitle('Manage your products types');
+
         parent::initialize();
     }
 

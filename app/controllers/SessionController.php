@@ -14,6 +14,7 @@ class SessionController extends ControllerBase
     public function initialize()
     {
         $this->tag->setTitle('Sign Up/Sign In');
+
         parent::initialize();
     }
 

@@ -7,6 +7,7 @@ class ErrorsController extends ControllerBase
     public function initialize()
     {
         $this->tag->setTitle('Oops!');
+
         parent::initialize();
     }
 
