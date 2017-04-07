@@ -6,13 +6,13 @@ use Phalcon\Mvc\Controller;
 
 class ControllerBase extends Controller
 {
-    protected function initialize()
+    public function initialize()
     {
         $this->tag->prependTitle('Phalcon Demo Application | ');
         $this->view->setTemplateAfter('main');
     }
 
-    protected function forward($uri)
+    public function forward($uri)
     {
         $uriParts = explode('/', $uri);
         $params = array_slice($uriParts, 2);
