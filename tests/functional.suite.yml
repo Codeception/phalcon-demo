@@ -14,3 +14,4 @@ modules:
             bootstrap: public/index.php
             cleanup: true
             savepoints: true
+            session: User\Functional\Session
