@@ -31,6 +31,6 @@ modules:
         password: '%DB_PASSWORD%'
         populate: true
         cleanup: true
-        dump: tests/_data/dump.sql
+        dump: schemas/phalcon_demo.sql
 params:
   - .env
