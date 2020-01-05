@@ -11,7 +11,7 @@ jobs:
     env:
       DB_ADAPTER: mysql
       DB_HOST: 127.0.0.1
-      DB_NAME: phalcon
+      DB_NAME: phalcon_demo
       DB_USERNAME: root
       DB_PASSWORD: password
     services:
