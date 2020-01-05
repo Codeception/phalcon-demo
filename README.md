@@ -20,11 +20,10 @@ switch to the relevant branch.
 
 ### Requirements
 
-* PHP >= 5.4
-* [Nginx][2] Web Server with [PHP-FPM][3] enabled
-* Latest stable [Phalcon Framework release][4] extension enabled
+* PHP >= 7.2
+* Latest stable [Phalcon Framework v4][4] extension enabled
 * [MySQL][5] >= 5.1.5
-* Codeception >= 2.2
+* Codeception >= 4.0
 
 ### Installation
 
@@ -96,7 +95,7 @@ cat schemas/phalcon_demo.sql | mysql -u root phalcon_demo
 
 **Note:**
 
-For these tests we use the user `root` without a password. You may need to change this in `tests/codeception.yml`.
+For these tests we use the user `root` with `password` as password. You may need to change this in `tests/codeception.yml`.
 You can override application config by creating `app/config/config.ini.dev` (already gitignored).
 
 ## Tests
@@ -139,8 +138,8 @@ See [CONTRIBUTING.md][15]
 ## License
 
 Phalcon Demo Application is open-sourced software licensed under the [New BSD License][16].<br>
-© 2012 - 2016 Phalcon Framework Team and contributors<br>
-© 2015 - 2016 Codeception Team and contributors
+© 2012 - 2020 Phalcon Framework Team and contributors<br>
+© 2015 - 2020 Codeception Team and contributors
 
 [phalcon-demo]: https://travis-ci.org/Codeception/phalcon-demo
 [1]: https://github.com/phalcon/invo/

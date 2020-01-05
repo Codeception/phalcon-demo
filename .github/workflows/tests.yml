@@ -1,0 +1,58 @@
+# GitHub Action for Phalcon with MySQL
+## Notes
+## Make sure you have .env.example or .env file in your project
+## and you have loaded Dotenv (https://github.com/vlucas/phpdotenv)
+name: Testing Phalcon with MySQL
+on: [push, pull_request]
+jobs:
+  phalcon:
+    name: Phalcon (PHP ${{ matrix.php-versions }})
+    runs-on: ubuntu-latest
+    env:
+      DB_ADAPTER: mysql
+      DB_HOST: 127.0.0.1
+      DB_NAME: phalcon
+      DB_USERNAME: root
+      DB_PASSWORD: password
+    services:
+      mysql:
+        image: mysql:5.7
+        env:
+          MYSQL_ALLOW_EMPTY_PASSWORD: false
+          MYSQL_ROOT_PASSWORD: password
+          MYSQL_DATABASE: phalcon_demo
+        ports:
+          - 3306
+        options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
+    strategy:
+      fail-fast: false
+      matrix:
+        php-versions: ['7.2', '7.3', '7.4']
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v1
+      - name: Setup PHP, with composer and extensions
+        uses: shivammathur/setup-php@v1
+        with:
+          php-version: ${{ matrix.php-versions }}
+          extensions: mbstring, dom, zip, phalcon4, mysql
+          coverage: xdebug #optional
+      - name: Get composer cache directory
+        id: composer-cache
+        run: echo "::set-output name=dir::$(composer config cache-files-dir)"
+      - name: Cache composer dependencies
+        uses: actions/cache@v1
+        with:
+          path: ${{ steps.composer-cache.outputs.dir }}
+          key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
+          restore-keys: ${{ runner.os }}-composer-
+      - name: Install Composer dependencies
+        run: composer install --no-progress --no-suggest --prefer-dist --optimize-autoloader --ignore-platform-reqs
+      - name: Prepare the application
+        run: php -r "file_exists('.env') || copy('.env.example', '.env');"
+      - name: Run Tests
+        run: |
+          vendor/bin/codecept build
+          vendor/bin/codecept run unit
+        env:
+          DB_PORT: ${{ job.services.mysql.ports['3306'] }}

@@ -23,7 +23,7 @@ try {
     /**
      * Load application services
      */
-    require APP_PATH . 'config/services.php';
+    $di = require APP_PATH . 'config/services.php';
 
     $application = new Application($di);
     $application->setEventsManager($eventsManager);
@@ -31,7 +31,7 @@ try {
     if (APPLICATION_ENV == APP_TEST) {
         return $application;
     } else {
-        echo $application->handle()->getContent();
+        echo $application->handle($_SERVER['REQUEST_URI'])->getContent();
     }
 } catch (Exception $e){
     echo $e->getMessage() . '<br>';

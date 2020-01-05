@@ -9,9 +9,9 @@ $router = new Router();
 
 $router->removeExtraSlashes(true);
 
-if (!isset($_GET['_url'])) {
-    $router->setUriSource(Router::URI_SOURCE_SERVER_REQUEST_URI);
-}
+//if (!isset($_GET['_url'])) {
+//    $router->setUriSource(Router::URI_SOURCE_SERVER_REQUEST_URI);
+//}
 
 $router->setEventsManager($eventsManager);
 

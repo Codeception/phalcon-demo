@@ -2,14 +2,14 @@
 
 namespace PhalconDemo\Library;
 
-use Phalcon\Mvc\User\Component;
+use Phalcon\Di\Injectable;
 
 /**
  * Elements
  *
  * Helps to build UI elements for the application
  */
-class Elements extends Component
+class Elements extends Injectable
 {
     private $headerMenu = [
         'navbar-left' => [
