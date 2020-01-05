@@ -2,7 +2,7 @@
 ## Notes
 ## Make sure you have .env.example or .env file in your project
 ## and you have loaded Dotenv (https://github.com/vlucas/phpdotenv)
-name: Testing Phalcon with MySQL
+name: Testing Phalcon demo project with Codeception
 on: [push, pull_request]
 jobs:
   phalcon:
