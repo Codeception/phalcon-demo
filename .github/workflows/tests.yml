@@ -53,6 +53,6 @@ jobs:
       - name: Run Tests
         run: |
           vendor/bin/codecept build
-          vendor/bin/codecept run unit
+          vendor/bin/codecept run
         env:
           DB_PORT: ${{ job.services.mysql.ports['3306'] }}
