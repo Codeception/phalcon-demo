@@ -124,10 +124,17 @@ $di->setShared('view', function () use ($config, $di, $eventsManager) {
 $di->setShared('db', function () use ($config) {
     $config = $config->get('database')->toArray();
 
+
     $dbClass = 'Phalcon\Db\Adapter\Pdo\\' . $config['adapter'];
     unset($config['adapter']);
 
-    return new $dbClass($config);
+    return new $dbClass([
+        'host'     => getenv('DB_HOST') ?? $config['host'],
+        'port'     => getenv('DB_PORT') ?? $config['port'],
+        'username' => getenv('DB_USERNAME') ?? $config['username'],
+        'password' => getenv('DB_PASSWORD') ?? $config['password'],
+        'dbname'   => getenv('DB_NAME') ?? $config['dbname']
+    ]);
 });
 
 /**
