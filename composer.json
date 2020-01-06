@@ -40,7 +40,7 @@
     "codeception/module-asserts": "dev-master | ^1.0",
     "codeception/module-phpbrowser": "dev-master | ^1.0",
     "codeception/module-db": "^1.0",
-    "codeception/module-phalcon4": "dev-phalcon4 | ^1.0"
+    "codeception/module-phalcon4": "^1.0.0"
   },
   "autoload-dev": {
     "psr-4": {
