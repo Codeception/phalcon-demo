@@ -21,12 +21,6 @@
       "homepage": "http://codeception.com/"
     }
   ],
-  "repositories": [
-    {
-      "type": "vcs",
-      "url":  "git@github.com:Codeception/module-phalcon4.git"
-    }
-  ],
   "require": {
     "php": ">=7.2.0 <8.0",
     "ext-phalcon": ">=4"
@@ -34,13 +28,13 @@
   "require-dev": {
     "vlucas/phpdotenv": "^4.1",
     "squizlabs/php_codesniffer": "^3.5.3",
-    "codeception/lib-innerbrowser": "dev-master | ^1.0",
-    "codeception/codeception": "4.0.x-dev | ^4.0",
+    "codeception/lib-innerbrowser": "^1.0",
+    "codeception/codeception": "^4.0",
     "codeception/util-robohelpers": "dev-master",
-    "codeception/module-asserts": "dev-master | ^1.0",
-    "codeception/module-phpbrowser": "dev-master | ^1.0",
+    "codeception/module-asserts": "^1.0",
+    "codeception/module-phpbrowser": "^1.0",
     "codeception/module-db": "^1.0",
-    "codeception/module-phalcon4": "^1.0.0"
+    "codeception/module-phalcon4": "^1.0.1"
   },
   "autoload-dev": {
     "psr-4": {
