@@ -5,7 +5,8 @@
   "keywords": [
     "codeception",
     "phalcon",
-    "demo"
+    "demo",
+    "phalcon4"
   ],
   "homepage": "https://github.com/Codeception/phalcon-demo",
   "license": "BSD-3-Clause",
