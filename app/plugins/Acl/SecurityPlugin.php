@@ -2,11 +2,11 @@
 
 namespace PhalconDemo\Plugins\Acl;
 
-use Phalcon\Acl;
+use Phalcon\Acl\Enum as Acl;
 use Phalcon\Acl\Role;
-use Phalcon\Acl\Resource;
+use Phalcon\Acl\Component;
 use Phalcon\Events\Event;
-use Phalcon\Mvc\User\Plugin;
+use Phalcon\Di\Injectable;
 use Phalcon\Mvc\Dispatcher;
 use Phalcon\Acl\Adapter\Memory as AclList;
 use PhalconDemo\Plugins\Acl\Resource\ResourceInterface;
@@ -16,7 +16,7 @@ use PhalconDemo\Plugins\Acl\Resource\ResourceInterface;
  *
  * This is the security plugin which controls that users only have access to the modules they're assigned to
  */
-class SecurityPlugin extends Plugin
+class SecurityPlugin extends \Phalcon\Di\Injectable
 {
     /**
      * @var ResourceInterface
@@ -66,7 +66,7 @@ class SecurityPlugin extends Plugin
 
             if ($this->resource instanceof ResourceInterface) {
                 foreach ($this->resource->getAllResources() as $resource => $actions) {
-                    $acl->addResource(new Resource($resource), $actions);
+                    $acl->addComponent(new \Phalcon\Acl\Component($resource), $actions);
                 }
 
                 // Grant access to public areas to both users and guests
@@ -113,7 +113,7 @@ class SecurityPlugin extends Plugin
 
         $acl = $this->getAcl();
 
-        if (!$acl->isResource($controller)) {
+        if (!$acl->isComponent($controller)) {
             $dispatcher->forward(
                 [
                     'controller' => 'errors',

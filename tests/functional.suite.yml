@@ -10,7 +10,7 @@ modules:
         # add framework module here
         - Helper\Functional
         - Asserts
-        - Phalcon:
+        - Phalcon4:
             bootstrap: public/index.php
             cleanup: true
             savepoints: true

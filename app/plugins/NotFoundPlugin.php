@@ -2,9 +2,8 @@
 
 namespace PhalconDemo\Plugins;
 
-use Phalcon\Dispatcher;
 use Phalcon\Events\Event;
-use Phalcon\Mvc\User\Plugin;
+use Phalcon\Di\Injectable;
 use Phalcon\Mvc\Dispatcher as MvcDispatcher;
 use Phalcon\Mvc\Dispatcher\Exception as DispatcherException;
 
@@ -13,7 +12,7 @@ use Phalcon\Mvc\Dispatcher\Exception as DispatcherException;
  *
  * Handles not-found controller/actions
  */
-class NotFoundPlugin extends Plugin
+class NotFoundPlugin extends \Phalcon\Di\Injectable
 {
     /**
      * This action is executed before execute any action in the application
@@ -28,11 +27,11 @@ class NotFoundPlugin extends Plugin
     {
         if ($exception instanceof DispatcherException) {
             switch ($exception->getCode()) {
-                case Dispatcher::EXCEPTION_INVALID_HANDLER:
-                case Dispatcher::EXCEPTION_CYCLIC_ROUTING:
+                case DispatcherException::EXCEPTION_INVALID_HANDLER:
+                case DispatcherException::EXCEPTION_CYCLIC_ROUTING:
                     $action = 'show500';
                     break;
-                case Dispatcher::EXCEPTION_INVALID_PARAMS:
+                case DispatcherException::EXCEPTION_INVALID_PARAMS:
                     $action = 'show400';
                     break;
                 default:

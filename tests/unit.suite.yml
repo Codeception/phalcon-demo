@@ -7,7 +7,7 @@ modules:
     enabled:
         - Asserts
         - Helper\Unit
-        - Phalcon:
+        - Phalcon4:
             bootstrap: public/index.php
             cleanup: true
             savepoints: true

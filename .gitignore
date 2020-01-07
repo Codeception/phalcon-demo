@@ -19,3 +19,4 @@ Vagrantfile
 /build/
 /vendor/*
 /tests/_support/_generated/*.php
+.env
