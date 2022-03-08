@@ -143,13 +143,13 @@ Phalcon Demo Application is open-sourced software licensed under the [New BSD Li
 
 [phalcon-demo]: https://travis-ci.org/Codeception/phalcon-demo
 [1]: https://github.com/phalcon/invo/
-[2]: http://nginx.org/
-[3]: http://php.net/manual/en/install.fpm.php
+[2]: https://nginx.org/
+[3]: https://php.net/manual/en/install.fpm.php
 [4]: https://github.com/phalcon/cphalcon/releases
 [5]: https://www.mysql.com/
-[6]: http://codeception.com/
-[7]: http://codeception.com/docs/01-Introduction
-[8]: http://codeception.com/docs/reference/Commands
+[6]: https://codeception.com/
+[7]: https://codeception.com/docs/01-Introduction
+[8]: https://codeception.com/docs/reference/Commands
 [9]: https://github.com/Codeception/phalcon-demo/blob/master/tests/_support/User/Functional/UserSteps.php
 [15]: https://github.com/Codeception/phalcon-demo/blob/master/CONTRIBUTING.md
 [16]: https://github.com/Codeception/phalcon-demo/blob/master/LICENSE.txt
