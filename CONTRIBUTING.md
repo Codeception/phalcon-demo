@@ -54,10 +54,10 @@ Phalcon Team
 
 [pr]: https://help.github.com/articles/using-pull-requests
 [forum]: https://forum.phalconphp.com
-[forum-qa]: http://phptest.club/
+[forum-qa]: https://phptest.club/
 [srt]: https://github.com/phalcon/cphalcon/wiki/Submit-Reproducible-Test
 [gb]: https://github.com/phalcon/cphalcon/wiki/Generating-a-backtrace
 [support]: https://phalconphp.com/support
-[codecept-doc]: http://codeception.com/docs/
+[codecept-doc]: https://codeception.com/docs/
 [nfr]: https://github.com/phalcon/cphalcon/wiki/New-Feature-Request---NFR
-[psr]: http://www.php-fig.org/psr/
+[psr]: https://www.php-fig.org/psr/

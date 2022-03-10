@@ -1,4 +1,4 @@
-> Questions should go to https://forum.phalcon.io or http://phptest.club/
+> Questions should go to https://forum.phalcon.io or https://phptest.club/
 > Phalcon documentation issues should go to https://github.com/phalcon/docs/issues
 
 ### Expected and Actual Behavior
